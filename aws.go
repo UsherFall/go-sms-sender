@@ -23,12 +23,12 @@ import (
 	"github.com/aws/aws-sdk-go/service/sns/snsiface"
 )
 
-type AmazonSNSClient struct {
+type AmazonSMSClient struct {
 	svc      snsiface.SNSAPI
 	template string
 }
 
-func GetAmazonSNSClient(accessKeyID string, secretAccessKey string, template string, region []string) (*AmazonSNSClient, error) {
+func GetAmazonSMSClient(accessKeyID string, secretAccessKey string, template string, region []string) (*AmazonSMSClient, error) {
 	if len(region) < 1 {
 		return nil, fmt.Errorf("missing parameter: region")
 	}
@@ -43,7 +43,7 @@ func GetAmazonSNSClient(accessKeyID string, secretAccessKey string, template str
 
 	svc := sns.New(sess)
 
-	snsClient := &AmazonSNSClient{
+	snsClient := &AmazonSMSClient{
 		svc:      svc,
 		template: template,
 	}
@@ -51,7 +51,7 @@ func GetAmazonSNSClient(accessKeyID string, secretAccessKey string, template str
 	return snsClient, nil
 }
 
-func (a *AmazonSNSClient) SendMessage(param map[string]string, targetPhoneNumber ...string) error {
+func (a *AmazonSMSClient) SendMessage(param map[string]string, targetPhoneNumber ...string) error {
 	if len(targetPhoneNumber) < 1 {
 		return fmt.Errorf("missing parameter: targetPhoneNumber")
 	}

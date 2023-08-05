@@ -18,7 +18,7 @@ import "fmt"
 
 const (
 	Twilio       = "Twilio SMS"
-	AmazonSNS    = "Amazon SNS"
+	AmazonSMS    = "Amazon SMS"
 	AzureACS     = "Azure ACS"
 	Msg91        = "Msg91 SMS"
 	GCCPAY       = "GCCPAY SMS"
@@ -43,8 +43,8 @@ func NewSmsClient(provider string, accessId string, accessKey string, sign strin
 	switch provider {
 	case Twilio:
 		return GetTwilioClient(accessId, accessKey, template)
-	case AmazonSNS:
-		return GetAmazonSNSClient(accessId, accessKey, template, other)
+	case AmazonSMS:
+		return GetAmazonSMSClient(accessId, accessKey, template, other)
 	case AzureACS:
 		return GetACSClient(accessId, template, other)
 	case Msg91:
